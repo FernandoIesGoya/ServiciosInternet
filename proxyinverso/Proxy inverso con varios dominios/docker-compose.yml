@@ -1,0 +1,59 @@
+version: '3'
+services:
+  apache1:
+    image: httpd:2.4
+    container_name: apache1
+    restart: always
+    volumes:
+      - ./htmlcloud:/usr/local/apache2/htdocs/ 
+    networks:
+      vlan:
+        ipv4_address: 10.0.150.2
+  apache2:
+    image: httpd:2.4
+    container_name: apache2
+    restart: always
+    volumes:
+      - ./htmlwordpress:/usr/local/apache2/htdocs/ 
+    networks:
+      vlan:
+        ipv4_address: 10.0.150.3
+  apache3:
+    image: httpd:2.4
+    container_name: apache3
+    restart: always
+    volumes:
+      - ./htmlcorreo:/usr/local/apache2/htdocs/ 
+    networks:
+      vlan:
+        ipv4_address: 10.0.150.4
+  web:
+    build: .
+    container_name: nginxReverseProxyHttps
+    restart: always
+    depends_on:
+      - apache1
+      - apache2
+      - apache3
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./conf.d/:/etc/nginx/conf.d
+      - ./passwd/:/etc/nginx/passwd
+      - ./letsencrypt/:/etc/letsencrypt/
+      - ./certificates/certs/:/etc/nginx/certs
+      - ./certificates/private/:/etc/nginx/private
+      - ./logs/:/var/log/nginx/
+    networks:
+      vlan:
+        ipv4_address: 10.0.150.5
+
+networks:
+  vlan:
+    driver: bridge
+    name: red-web
+    ipam:
+      config:
+        - subnet: "10.0.150.0/24"
+          gateway: "10.0.150.1"
