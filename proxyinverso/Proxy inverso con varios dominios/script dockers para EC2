@@ -1,0 +1,7 @@
+#!/bin/bash
+apt install -yq docker.io
+groupadd docker
+usermod -aG docker ubuntu
+mkdir -p /home/ubuntu/.dockers
+sudo chmod g+rwx /home/ubuntu/.docker 
+apt install -yq docker-compose
