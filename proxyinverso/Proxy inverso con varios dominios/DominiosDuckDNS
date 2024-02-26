@@ -1,4 +1,0 @@
-echo url="https://www.duckdns.org/update?domains=wordpresscloudfernandorm&token=e7db2910-923a-4ed2-9e04-af43831e816e&ip=" | curl -k -o ~/duckdns/duck.log -K -
-echo url="https://www.duckdns.org/update?domains=correofernandorm&token=e7db2910-923a-4ed2-9e04-af43831e816e&ip=" | curl -k -o ~/duckdns/duck.log -K -
-echo url="https://www.duckdns.org/update?domains=wordpresscloudfernandorm&token=e7db2910-923a-4ed2-9e04-af43831e816e&ip=" | curl -k -o ~/duckdns/duck.log -K -
-echo url="https://www.duckdns.org/update?domains=cloudfernandorm&token=e7db2910-923a-4ed2-9e04-af43831e816e&ip=" | curl -k -o ~/duckdns/duck.log -K -
